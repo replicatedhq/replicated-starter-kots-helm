@@ -1,0 +1,23 @@
+apiVersion: kots.io/v1beta1
+kind: HelmChart
+metadata:
+  name: replicated-starter-kots-helm
+spec:
+  chart:
+    name: replicated-starter-kots-helm
+    chartVersion: 0.1.0
+
+  values:
+    image:
+      repository: nginx
+      tag: 1.23.3
+      pullPolicy: IfNotPresent
+
+    configmap:
+      config: 
+        enabled: true
+        data:
+          index.html: |
+            {{repl ConfigOptionData "nginx_index_html" | nindent 12 }}
+          styles.css: |
+            {{repl ConfigOptionData "nginx_styles_css" | nindent 12 }}
