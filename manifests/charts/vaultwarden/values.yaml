@@ -1,0 +1,220 @@
+# Set global labels and annotations to be used across all objects created by the chart
+global:
+  labels: {}
+  annotations: {}
+
+mariadb:
+  enabled: false
+
+apps:
+  nginx:
+    enabled: true
+    type: deployment
+
+    replicas: 1
+
+    image:
+      repository: nginx
+      tag: latest
+      pullPolicy:
+
+    command: []
+    args: []
+
+    env:
+    envFrom: []
+
+    volumeMounts: []
+
+    annotations: {}
+    labels: {}
+
+    automountServiceAccountToken: true
+    serviceAccount:
+      # the underlying templates here are currently broken
+      create: false
+      #annotations: {}
+      #name: "vaultwarden-sa"
+
+    initContainers: {}
+    additionalContainers: {}
+    
+    podManagementPolicy:
+    podAnnotations: {}
+    podLabels: {}
+
+    strategy:
+    rollingUpdate:
+      unavailable:
+      surge:
+      partition:
+    revisionHistoryLimit: 3
+
+    priorityClassName:  # system-node-critical
+    runtimeClassName:  # nvidia
+    schedulerName:  # awkward-dangerous-scheduler
+    hostname:
+    hostNetwork: false
+    dnsPolicy:  # ClusterFirst
+    dnsConfig: {}
+    enableServiceLinks: true
+    podSecurityContext: {}
+    securityContext: {}
+    lifecycle: {}
+    initContainers: {}
+    additionalContainers: {}
+    probes:
+      liveness:
+        enabled: false
+        custom: false
+        spec:
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness:
+        enabled: false
+        custom: false
+        spec:
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      startup:
+        enabled: false
+        custom: false
+        spec:
+          initialDelaySeconds: 0
+          timeoutSeconds: 1
+          periodSeconds: 5
+          failureThreshold: 30
+    termination:
+      messagePath:
+      messagePolicy:
+      gracePeriodSeconds:
+    # -- Used in conjunction with `main.type: statefulset` to create individual disks for each instance.
+    volumeClaimTemplates: []
+    
+    nodeSelector: {}
+    affinity: {}
+    topologySpreadConstraints: []
+    tolerations: []
+    hostAliases: []
+    resources: {}
+
+  vaultwarden:
+    enabled: true
+    type: deployment
+
+    replicas: 1
+
+    image:
+      repository: vaultwarden/server
+      tag: 1.27.0-alpine
+      pullPolicy:
+    imagePullSecrets: []
+
+    command: []
+    args: []
+
+    env:
+    envFrom: []
+
+    volumeMounts: []
+
+    annotations: {}
+    labels: {}
+
+    automountServiceAccountToken: true
+    serviceAccount:
+      # the underlying templates here are currently broken
+      create: false
+      #annotations: {}
+      #name: "vaultwarden-sa"
+
+    initContainers: {}
+    additionalContainers: {}
+    
+    podManagementPolicy:
+    podAnnotations: {}
+    podLabels: {}
+
+    strategy:
+    rollingUpdate:
+      unavailable:
+      surge:
+      partition:
+    revisionHistoryLimit: 3
+
+    priorityClassName:  # system-node-critical
+    runtimeClassName:  # nvidia
+    schedulerName:  # awkward-dangerous-scheduler
+    hostname:
+    hostNetwork: false
+    dnsPolicy:  # ClusterFirst
+    dnsConfig: {}
+    enableServiceLinks: true
+    podSecurityContext: {}
+    securityContext: {}
+    lifecycle: {}
+    initContainers: {}
+    additionalContainers: {}
+    probes:
+      liveness:
+        enabled: false
+        custom: false
+        spec:
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      readiness:
+        enabled: false
+        custom: false
+        spec:
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+      startup:
+        enabled: false
+        custom: false
+        spec:
+          initialDelaySeconds: 0
+          timeoutSeconds: 1
+          periodSeconds: 5
+          failureThreshold: 30
+    termination:
+      messagePath:
+      messagePolicy:
+      gracePeriodSeconds:
+    # -- Used in conjunction with `main.type: statefulset` to create individual disks for each instance.
+    volumeClaimTemplates: []
+    
+    nodeSelector: {}
+    affinity: {}
+    topologySpreadConstraints: []
+    tolerations: []
+    hostAliases: []
+    resources: {}
+
+services:
+  example:
+    enabled: false
+    nameOverride:
+    type: ClusterIP
+    externalTrafficPolicy:
+    ipFamilyPolicy:
+    ipFamilies: []
+    annotations: {}
+    labels: {}
+    ports:
+      http:
+        enabled: true
+        primary: true
+        port:
+        protocol: HTTP
+        targetPort:
+        nodePort:
+
+
