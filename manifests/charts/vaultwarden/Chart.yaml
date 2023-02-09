@@ -5,7 +5,7 @@ annotations:
 apiVersion: v2
 appVersion: 1.25.2
 dependencies:
-- name: replicatedLibrary
+- name: replicated-library
   version: "0.1.0"
   repository: "file://../../../../replicated-library-chart"
 - condition: mariadb.enabled

@@ -1,9 +1,9 @@
 dependencies:
-- name: replicatedLibrary
+- name: replicated-library
   repository: file://../../../../replicated-library-chart
   version: 0.1.0
 - name: mariadb
   repository: https://charts.bitnami.com/bitnami
   version: 11.0.14
-digest: sha256:6314db855489e70580b0105bc8b4b017e9090ae1646e3d9a02fb148b93a9f734
-generated: "2023-02-08T14:11:34.325421-05:00"
+digest: sha256:b4352240b8b9bd636ee1301cfcbcb43458376837a4a851a752ec2987bd9935a4
+generated: "2023-02-09T02:39:56.370143-05:00"
