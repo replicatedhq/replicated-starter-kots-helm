@@ -14,38 +14,6 @@ apps:
     image:
       repository: nginx
       tag: latest
-      pullPolicy:
-    command: []
-    args: []
-    env:
-    envFrom: []
-    volumeMounts: []
-    annotations: {}
-    labels: {}
-    automountServiceAccountToken: true
-    serviceAccount:
-      # the underlying templates here are currently broken
-      create: false
-      #annotations: {}
-      #name: "vaultwarden-sa"
-    strategy:
-    rollingUpdate:
-      unavailable:
-      surge:
-      partition:
-    revisionHistoryLimit: 3
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
-    termination:
-      messagePath:
-      messagePolicy:
-      gracePeriodSeconds:
-
 
   vaultwarden:
     enabled: true
@@ -54,53 +22,26 @@ apps:
     image:
       repository: vaultwarden/server
       tag: 1.27.0-alpine
-      pullPolicy:
-    command: []
-    args: []
-    env:
-    envFrom: []
-    volumeMounts: []
-    annotations: {}
-    labels: {}
-    automountServiceAccountToken: true
-    serviceAccount:
-      # the underlying templates here are currently broken
-      create: false
-      #annotations: {}
-      #name: "vaultwarden-sa"
-    strategy:
-    rollingUpdate:
-      unavailable:
-      surge:
-      partition:
-    revisionHistoryLimit: 3
-    probes:
-      liveness:
-        enabled: false
-      readiness:
-        enabled: false
-      startup:
-        enabled: false
-    termination:
-      messagePath:
-      messagePolicy:
-      gracePeriodSeconds:
 
 services:
-  example:
-    enabled: false
-    nameOverride:
+  nginx:
+    enabled: true
+    appName: nginx
     type: ClusterIP
-    externalTrafficPolicy:
-    ipFamilyPolicy:
-    ipFamilies: []
-    annotations: {}
-    labels: {}
     ports:
       http:
         enabled: true
-        primary: true
-        port:
+        port: 80
         protocol: HTTP
-        targetPort:
-        nodePort:
+        targetPort: 80
+
+  vaultwarden:
+    enabled: true
+    appName: vaultwarden
+    type: ClusterIP
+    ports:
+      http:
+        enabled: true
+        port: 80
+        protocol: HTTP
+        targetPort: 80
