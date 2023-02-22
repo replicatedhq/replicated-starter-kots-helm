@@ -7,14 +7,6 @@ mariadb:
   enabled: false
 
 apps:
-  nginx:
-    enabled: true
-    type: deployment
-    replicas: 1
-    image:
-      repository: nginx
-      tag: latest
-
   vaultwarden:
     enabled: true
     type: deployment
@@ -24,17 +16,6 @@ apps:
       tag: 1.27.0-alpine
 
 services:
-  nginx:
-    enabled: true
-    appName: nginx
-    type: ClusterIP
-    ports:
-      http:
-        enabled: true
-        port: 80
-        protocol: HTTP
-        targetPort: 80
-
   vaultwarden:
     enabled: true
     appName: vaultwarden
@@ -45,3 +26,18 @@ services:
         port: 80
         protocol: HTTP
         targetPort: 80
+
+ingresses:
+  vaultwarden:
+    enabled: true
+    serviceName: vaultwarden
+    ingressClassName: default
+    ## Configure the hosts for the ingress
+    hosts:
+      - host: vaultwarden.example.com
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              port: 80
+    tls: []
