@@ -8,4 +8,8 @@ spec:
   icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/kubernetes/icon/color/kubernetes-icon-color.png
   statusInformers:
     - deployment/vaultwarden
-  ports: {}
+  ports:
+    - serviceName: "vaultwarden"
+      servicePort: 80
+      localPort: 80
+      applicationUrl: "http://vaultwarden"
