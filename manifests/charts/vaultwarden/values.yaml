@@ -31,7 +31,6 @@ ingresses:
   vaultwarden:
     enabled: true
     serviceName: vaultwarden
-    ingressClassName: default
     ## Configure the hosts for the ingress
     hosts:
       - host: vaultwarden.example.com
